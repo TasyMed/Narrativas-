@@ -8,7 +8,18 @@
         <link rel="stylesheet" href="main.css">
     </head>
     <body>
-      
+
+        <!-- El div "mapa" contiene las imágenes para la lógica de movimiento dinámico mediante texto. Empieza con la imagen plano y mediante se haga el addListeners selecciona las otras imágenes guardadas en data-img -->
+        <div class="mapa">
+            <img id="imagen-principal" src="./image/plano.png" alt="plano">
+            <a href="./cuentosPages/ama.html" class="texto" data-img="./image/ama.png">Amazonica</a>
+            <a href="./cuentosPages/and.html" class="texto" data-img="./image/an.png">Andina</a>
+            <a href="./cuentosPages/cali.html" class="texto" data-img="./image/cali.png">Pacifica</a>
+            <a href="./cuentosPages/costa.html" class="texto" data-img="./image/costa.png">Caribe</a>
+            <a href="./cuentosPages/ori.html" class="texto" data-img="./image/ori.png">Orinoquia</a>
+        </div>  
+
+       
         <script src="app.js" async defer></script>
     </body>
 </html>
