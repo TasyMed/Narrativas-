@@ -13,28 +13,49 @@ texts.forEach(text => {
 
 //Logica de los textos
 
-function Cuento(titulo, cuento) {
-  this.titulo = titulo;
-  this.cuento = cuento;
-}
-
-
+//Funcion para cargar los cuentos
+//Recibe el id del setion html (idSeccion) el archivo JSON (archivo) de la carpeta cuentosJson
 function cargarCuentos(idSeccion, archivo) {
+  //Fetch para obtener el archivo JSON 
   fetch(archivo)
-    .then(response => response.json()) // Convierte la respuesta a JSON
-    .then(cuentos => {
-      const seccion = document.getElementById(idSeccion);
-      if (!seccion) return;
+  //Promesa que convierte la respuesta a JSON
+  .then(response => response.json())
+  //Promesa que recibe el JSON y lo imprime en consola
+  .then(data => {
+    //Imprime el JSON en consola
+    console.log("JSON recibido:", data);
+    //Si el JSON tiene la propiedad cuentos y es un array, se asigna a data 
+    if (data.cuentos && Array.isArray(data.cuentos)) {
+      //Se asigna a data la propiedad cuentos
+      data = data.cuentos;
+    }
+    //Si data no es un array, imprime un error en consola
+    if (!Array.isArray(data)) {
+      console.error("Formato incorrecto en el JSON");
+      return;
+    }
+    //Selecciona el elemento con el id idSeccion
+    const seccion = document.getElementById(idSeccion);
+    //Si no existe la seccion, se retorna
+    if (!seccion) return;
+    //Itera sobre cada cuento en el JSON
+    data.forEach(cuento => {
+      //Crea un div 
+      const div = document.createElement("div");
+      //Asigna el innerHTML del div con el titulo y el cuento
+      div.innerHTML = `<h2 id="titulo">${cuento.titulo}</h2><p id="texto">${cuento.cuentos}</p>`;
+      //Agrega la clase cuento al div
+      seccion.appendChild(div);
+    });
+  })
+  //Promesa que imprime un error en consola si no se pudo cargar el JSON
+  .catch(error => console.error("Error cargando el JSON:", error));
 
-      cuentos.forEach(cuento => {
-        const div = document.createElement("div");
-        div.innerHTML = `<h2>${cuento.titulo}</h2><p>${cuento.cuento}</p>`;
-        seccion.appendChild(div);
-      });
-    })
-    .catch(error => console.error("Error cargando el JSON:", error));
 }
 
-
-cargarCuentos("amazonas", "./cuentosJson/ama.json");
-cargarCuentos("andes", "./cuentosJson/and.json");
+//Carga los cuentos en las secciones
+cargarCuentos("amazonas", "/cuentosJson/ama.json");
+cargarCuentos("andes", "/cuentosJson/and.json");
+cargarCuentos("caribe", "/cuentosJson/car.json");
+cargarCuentos("orinoquia", "/cuentosJson/ori.json");
+cargarCuentos("pacifico", "/cuentosJson/pac.json");
