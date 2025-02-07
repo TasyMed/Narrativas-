@@ -10,3 +10,31 @@ texts.forEach(text => {
     image.src = text.getAttribute("data-img");
   });
 });
+
+//Logica de los textos
+
+function Cuento(titulo, cuento) {
+  this.titulo = titulo;
+  this.cuento = cuento;
+}
+
+
+function cargarCuentos(idSeccion, archivo) {
+  fetch(archivo)
+    .then(response => response.json()) // Convierte la respuesta a JSON
+    .then(cuentos => {
+      const seccion = document.getElementById(idSeccion);
+      if (!seccion) return;
+
+      cuentos.forEach(cuento => {
+        const div = document.createElement("div");
+        div.innerHTML = `<h2>${cuento.titulo}</h2><p>${cuento.cuento}</p>`;
+        seccion.appendChild(div);
+      });
+    })
+    .catch(error => console.error("Error cargando el JSON:", error));
+}
+
+
+cargarCuentos("amazonas", "./cuentosJson/ama.json");
+cargarCuentos("andes", "./cuentosJson/and.json");
