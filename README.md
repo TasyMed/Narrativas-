@@ -31,6 +31,3 @@ Para manejar la evolución del proyecto, se usaron las siguientes estrategias:
 - Organización de ramas para garantizar un desarrollo estructurado.
 - Resolución de conflictos antes de fusiones para evitar problemas de integración.
 
-*Este documento describe la aplic*ación práctica de Git y GitHub en este proyecto, utilizando un enfoque basado en buenas prácticas.
-
-
